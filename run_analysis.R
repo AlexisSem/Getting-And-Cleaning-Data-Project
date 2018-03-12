@@ -89,14 +89,13 @@ testData <- cbind(subjectTest, source, testLabels, meanAndStdTestSet)
 tidyData <- rbind(trainData, testData)
 
 #############################################################################
-##################### AVG per variable, activity and user ###################
+##################### VARIABLES AVG PER USER AND ACTIVITY ###################
 #############################################################################
 
 
 columnsToKeep <- c("subjectId", "activityId", "activityName", "source")
 dataToGroup <- setdiff(colnames(tidyData), columnsToKeep)
 meltData <- melt(tidyData, id = columnsToKeep, measure.vars = dataToGroup)
-
 
 summmarizedTidyData <- dcast(meltData, subjectId+activityName ~ variable, mean)
 
