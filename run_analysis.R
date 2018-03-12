@@ -9,7 +9,6 @@ if (!require(reshape2)) { install.packages("reshape2")}
 library(data.table)
 library(reshape2)
 
-
 #############################################################################
 ################################ COLUMN NAMES ###############################
 #############################################################################
@@ -17,20 +16,17 @@ library(reshape2)
 # Read the activity labels
 activityLabels <- read.table("UCI HAR Dataset/activity_labels.txt")[, 2]
 
-
 # Read the features
 features <- read.table("UCI HAR Dataset/features.txt")[, 2]
 
 # Get the mean and std feature names only
 meanAndStdFeatures <- grepl("mean|std", features)
 
-
 #############################################################################
 ################################# TRAIN DATA ################################
 #############################################################################
 
 # Read the train data
-
 trainLabels <- read.table("UCI HAR Dataset/train/y_train.txt")
 trainSet <- read.table("UCI HAR Dataset/train/x_train.txt")
 subjectTrain <- read.table("UCI HAR Dataset/train/subject_train.txt")
@@ -53,13 +49,11 @@ names(source) <- "source"
 # Get the complete training table
 trainData <- cbind(subjectTrain, source, trainLabels, meanAndStdTrainSet)
 
-
 #############################################################################
 ################################## TEST DATA ################################
 #############################################################################
 
 # Read the test data
-
 testLabels <- read.table("UCI HAR Dataset/test/y_test.txt")
 testSet <- read.table("UCI HAR Dataset/test/x_test.txt")
 subjectTest <- read.table("UCI HAR Dataset/test/subject_test.txt")
@@ -106,4 +100,3 @@ rm(trainLabels, trainSet, subjectTrain, meanAndStdTrainSet)
 rm(testLabels, testSet, subjectTest, meanAndStdTestSet)
 rm(source, activityLabels, columnsToKeep, dataToGroup, features, meanAndStdFeatures)
 rm(meltData)
-
