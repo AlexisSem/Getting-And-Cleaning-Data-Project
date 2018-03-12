@@ -9,6 +9,7 @@ if (!require(reshape2)) { install.packages("reshape2")}
 library(data.table)
 library(reshape2)
 
+
 #############################################################################
 ################################ COLUMN NAMES ###############################
 #############################################################################
@@ -54,6 +55,7 @@ trainData <- cbind(subjectTrain, source, trainLabels, meanAndStdTrainSet)
 #############################################################################
 
 # Read the test data
+
 testLabels <- read.table("UCI HAR Dataset/test/y_test.txt")
 testSet <- read.table("UCI HAR Dataset/test/x_test.txt")
 subjectTest <- read.table("UCI HAR Dataset/test/subject_test.txt")
@@ -90,7 +92,7 @@ columnsToKeep <- c("subjectId", "activityId", "activityName", "source")
 dataToGroup <- setdiff(colnames(tidyData), columnsToKeep)
 meltData <- melt(tidyData, id = columnsToKeep, measure.vars = dataToGroup)
 
-summmarizedTidyData <- dcast(meltData, subjectId+activityName ~ variable, mean)
+summarizedTidyData <- dcast(meltData, subjectId+activityName ~ variable, mean)
 
 #############################################################################
 ############################# CLEAN UP ENVIRONMENT ##########################
@@ -100,3 +102,10 @@ rm(trainLabels, trainSet, subjectTrain, meanAndStdTrainSet)
 rm(testLabels, testSet, subjectTest, meanAndStdTestSet)
 rm(source, activityLabels, columnsToKeep, dataToGroup, features, meanAndStdFeatures)
 rm(meltData)
+
+#############################################################################
+############################## WRITE THE DATA SET ###########################
+#############################################################################
+
+write.table(tidyData, "tidyData.txt", row.names = FALSE, quote = FALSE)
+write.table(summarizedTidyData, "summarizedTidyData.txt", row.names = FALSE, quote = FALSE)
