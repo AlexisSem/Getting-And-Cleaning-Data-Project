@@ -92,7 +92,6 @@ tidyData <- rbind(trainData, testData)
 ##################### VARIABLES AVG PER USER AND ACTIVITY ###################
 #############################################################################
 
-
 columnsToKeep <- c("subjectId", "activityId", "activityName", "source")
 dataToGroup <- setdiff(colnames(tidyData), columnsToKeep)
 meltData <- melt(tidyData, id = columnsToKeep, measure.vars = dataToGroup)
